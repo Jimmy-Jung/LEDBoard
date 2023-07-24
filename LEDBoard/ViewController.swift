@@ -68,11 +68,12 @@ final class ViewController: UIViewController {
         view.addGestureRecognizer(gesture)
     }
     
+    // MARK: - @objc Methods
     @objc func keyboardDown(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
     }
-    // MARK: - Action Methods
     
+    // MARK: - Action Methods
     @IBAction func sendButtonTapped(_ sender: UIButton) {
         ledLabel.text = textField.text
         textField.text = ""
