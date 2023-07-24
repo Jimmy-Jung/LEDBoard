@@ -31,6 +31,7 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configUI()
+        addTapGesture()
     }
     
     // MARK: - Private Methods
@@ -60,6 +61,15 @@ final class ViewController: UIViewController {
         
         // LEDLabel
         ledLabel.textColor = .systemRed
+    }
+    
+    private func addTapGesture() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(keyboardDown(_:)))
+        view.addGestureRecognizer(gesture)
+    }
+    
+    @objc func keyboardDown(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
     }
     // MARK: - Action Methods
     
