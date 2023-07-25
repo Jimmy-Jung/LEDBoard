@@ -65,12 +65,22 @@ final class ViewController: UIViewController {
     
     private func addTapGesture() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(keyboardDown(_:)))
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(upperViewToggle(_:)))
+        doubleTap.numberOfTapsRequired = 2
         view.addGestureRecognizer(gesture)
+        view.addGestureRecognizer(doubleTap)
     }
     
     // MARK: - @objc Methods
     @objc func keyboardDown(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
+    }
+    
+    @objc func upperViewToggle(_ sender: UITapGestureRecognizer) {
+        textFieldBackgroundView.isHidden.toggle()
+        sendButton.isHidden.toggle()
+        textConfigButton.isHidden.toggle()
+        textField.isHidden.toggle()
     }
     
     // MARK: - Action Methods
@@ -82,7 +92,11 @@ final class ViewController: UIViewController {
     
     @IBAction func textConfigButtonTapped(_ sender: UIButton) {
         // 색 변화 트랜지션 효과 적용
-        UIView.transition(with: ledLabel, duration: 0.3, options: [.transitionCrossDissolve, .curveEaseInOut]) { [weak self] in
+        UIView.transition(
+            with: ledLabel,
+            duration: 0.3,
+            options: [.transitionCrossDissolve, .curveEaseInOut]
+        ) { [weak self] in
             self?.ledLabel.textColor = self?.ledLabelColorSet.randomElement()
         }
     }
